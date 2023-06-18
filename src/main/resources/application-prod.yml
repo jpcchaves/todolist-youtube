@@ -1,0 +1,16 @@
+spring:
+  config:
+    import: optional:file:.env[.properties]
+  datasource:
+    username: ${DB_PROD_USERNAME}
+    password: ${DB_PROD_PASSWORD}
+    url: ${DB_PROD_URL}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgresSQLDialect
+        show_sql: true
+        format_sql: true
