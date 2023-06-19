@@ -1,6 +1,8 @@
 package com.tutorial.todolist.domain.entities;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.util.Date;
 
@@ -20,7 +22,11 @@ public class Todo {
     private Category category;
 
     private Date concludedAt;
+
+    @CreationTimestamp
     private Date createdAt;
+
+    @UpdateTimestamp
     private Date updatedAt;
 
     public Todo() {
