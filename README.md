@@ -37,3 +37,13 @@ ALTER TABLE
 ADD
   CONSTRAINT todos_pkey PRIMARY KEY (id)
 ```
+
+### Seed de categorias
+```
+INSERT INTO
+ public.categories ("name")
+VALUES
+ ('Trabalho'),
+ ('Casa'),
+ ('Lazer');
+```
