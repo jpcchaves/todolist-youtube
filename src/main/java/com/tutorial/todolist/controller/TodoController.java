@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1/todos")
@@ -20,7 +21,7 @@ public class TodoController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Todo>> getAll() {
+    public ResponseEntity<Map<String, List<TodoDto>>> getAll() {
         return ResponseEntity.status(HttpStatus.OK).body(todoService.getAll());
     }
 
@@ -35,7 +36,8 @@ public class TodoController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Todo> update(@PathVariable Long id, @RequestBody Todo todo) {
+    public ResponseEntity<Todo> update(@PathVariable Long id,
+                                       @RequestBody Todo todo) {
         return ResponseEntity.status(HttpStatus.OK).body(todoService.update(id, todo));
     }
 

@@ -1,5 +1,6 @@
 package com.tutorial.todolist.service.impl;
 
+import com.tutorial.todolist.data.dto.CategoryDto;
 import com.tutorial.todolist.data.dto.TodoCreateDto;
 import com.tutorial.todolist.data.dto.TodoDto;
 import com.tutorial.todolist.domain.entities.Category;
@@ -8,10 +9,11 @@ import com.tutorial.todolist.repository.CategoryRepository;
 import com.tutorial.todolist.repository.TodoRepository;
 import com.tutorial.todolist.service.TodoService;
 import com.tutorial.todolist.utils.mapper.MapperUtils;
-import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class TodoServiceImpl implements TodoService {
@@ -28,9 +30,17 @@ public class TodoServiceImpl implements TodoService {
     }
 
     @Override
-    public List<Todo> getAll() {
-        List<Todo> todoList = todoRepository.findAll();
-        return todoList;
+    public Map<String, List<TodoDto>> getAll() {
+        List<Category> categoryList = categoryRepository.findAll();
+
+        List<CategoryDto> categoryDtoList = mapperUtils.parseListObjects(categoryList, CategoryDto.class);
+
+        Map<String, List<TodoDto>> todoDtoMap = new HashMap<>();
+        for (CategoryDto dto : categoryDtoList) {
+            todoDtoMap.put(dto.getName(), dto.getTodos());
+        }
+
+        return todoDtoMap;
     }
 
     @Override
