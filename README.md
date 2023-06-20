@@ -58,7 +58,6 @@ public class MapperUtils {
 <dependency>
     <groupId>org.flywaydb</groupId>
     <artifactId>flyway-core</artifactId>
-    <version>9.19.4</version>
 </dependency>
 ```
 
