@@ -1,6 +1,67 @@
 ﻿# Todo List
+
+## Implementando DTO com ModelMapper
+
+### Dependência do ModelMapper
+```
+<dependency>
+    <groupId>org.modelmapper</groupId>
+    <artifactId>modelmapper</artifactId>
+    <version>3.1.1</version>
+</dependency>
+```
+### Classe de configuração p/ tornar o mapper um componente gerenciado pelo Spring
+```
+@Configuration
+public class MapperConfig {
+    @Bean
+    public ModelMapper modelMapper() {
+        return new ModelMapper();
+    }
+}
+```
+
+### Classe utilitária com métodos que iremos utilizar na implementação dos DTOs
+```
+@Component
+public class MapperUtils {
+    private final ModelMapper mapper;
+
+    public MapperUtils(ModelMapper mapper) {
+        this.mapper = mapper;
+    }
+
+    public <O, D> D parseObject(O origin,
+                                Class<D> destination) {
+        return mapper.map(origin, destination);
+    }
+
+    public <O, D> List<D> parseListObjects(List<O> origin,
+                                           Class<D> destination) {
+
+        List<D> destinationObjects = new ArrayList<>();
+
+        for (O o : origin) {
+            destinationObjects.add(mapper.map(o, destination));
+        }
+
+        return destinationObjects;
+    }
+
+    public <O, D> Set<D> parseSetObjects(Set<O> origin,
+                                         Class<D> destination) {
+        Set<D> destinationObjects = new HashSet<>();
+
+        for (O o : origin) {
+            destinationObjects.add(mapper.map(o, destination));
+        }
+
+        return destinationObjects;
+    }
+}
+```
  
- Migrations para versionar o banco de dados:
+## Migrations para versionar o banco de dados:
 
 ### Criar tabela category
  ```
