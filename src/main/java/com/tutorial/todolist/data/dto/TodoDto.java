@@ -1,48 +1,36 @@
-package com.tutorial.todolist.domain.entities;
+package com.tutorial.todolist.data.dto;
 
+import com.tutorial.todolist.domain.entities.Category;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.Date;
 
-@Entity
-@Table(name = "todos")
-public class Todo {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class TodoDto {
     private Long id;
     private String todo;
     private boolean concluded;
     private boolean active;
     private LocalDate deadline;
-
-    @ManyToOne
-    @JoinColumn(name = "category_id", referencedColumnName = "id")
-    private Category category;
-
+    private CategoryDto category;
     private Date concludedAt;
-
-    @CreationTimestamp
     private Date createdAt;
-
-    @UpdateTimestamp
     private Date updatedAt;
 
-    public Todo() {
+    public TodoDto() {
     }
 
-    public Todo(Long id,
-                String todo,
-                boolean concluded,
-                boolean active,
-                LocalDate deadline,
-                Category category,
-                Date concludedAt,
-                Date createdAt,
-                Date updatedAt) {
+    public TodoDto(Long id,
+                   String todo,
+                   boolean concluded,
+                   boolean active,
+                   LocalDate deadline,
+                   CategoryDto category,
+                   Date concludedAt,
+                   Date createdAt,
+                   Date updatedAt) {
         this.id = id;
         this.todo = todo;
         this.concluded = concluded;
@@ -94,6 +82,14 @@ public class Todo {
         this.deadline = deadline;
     }
 
+    public CategoryDto getCategory() {
+        return category;
+    }
+
+    public void setCategory(CategoryDto category) {
+        this.category = category;
+    }
+
     public Date getConcludedAt() {
         return concludedAt;
     }
@@ -116,13 +112,5 @@ public class Todo {
 
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
-    }
-
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
     }
 }
