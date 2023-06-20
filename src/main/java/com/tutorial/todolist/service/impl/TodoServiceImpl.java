@@ -7,6 +7,7 @@ import com.tutorial.todolist.domain.entities.Todo;
 import com.tutorial.todolist.repository.CategoryRepository;
 import com.tutorial.todolist.repository.TodoRepository;
 import com.tutorial.todolist.service.TodoService;
+import com.tutorial.todolist.utils.mapper.MapperUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
@@ -16,11 +17,14 @@ import java.util.List;
 public class TodoServiceImpl implements TodoService {
     private final TodoRepository todoRepository;
     private final CategoryRepository categoryRepository;
+    private final MapperUtils mapperUtils;
 
     public TodoServiceImpl(TodoRepository todoRepository,
-                           CategoryRepository categoryRepository) {
+                           CategoryRepository categoryRepository,
+                           MapperUtils mapperUtils) {
         this.todoRepository = todoRepository;
         this.categoryRepository = categoryRepository;
+        this.mapperUtils = mapperUtils;
     }
 
     @Override
@@ -53,9 +57,8 @@ public class TodoServiceImpl implements TodoService {
 
 
         Todo savedTodo = todoRepository.save(todo);
-        TodoDto todoDto = new TodoDto();
 
-        BeanUtils.copyProperties(savedTodo,todoDto);
+        TodoDto todoDto = mapperUtils.parseObject(savedTodo, TodoDto.class);
 
         return todoDto;
     }
