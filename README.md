@@ -47,17 +47,6 @@ public class MapperUtils {
 
         return destinationObjects;
     }
-
-    public <O, D> Set<D> parseSetObjects(Set<O> origin,
-                                         Class<D> destination) {
-        Set<D> destinationObjects = new HashSet<>();
-
-        for (O o : origin) {
-            destinationObjects.add(mapper.map(o, destination));
-        }
-
-        return destinationObjects;
-    }
 }
 ```
  
