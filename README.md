@@ -106,5 +106,6 @@ INSERT INTO
 VALUES
  ('Trabalho'),
  ('Casa'),
- ('Lazer');
+ ('Lazer'),
+ ('Outro');
 ```
