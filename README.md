@@ -52,6 +52,16 @@ public class MapperUtils {
  
 ## Migrations para versionar o banco de dados:
 
+### Dependencia do Flyway
+
+```
+<dependency>
+    <groupId>org.flywaydb</groupId>
+    <artifactId>flyway-core</artifactId>
+    <version>9.19.4</version>
+</dependency>
+```
+
 ### Criar tabela category
  ```
  CREATE TABLE
