@@ -1,8 +1,7 @@
 package com.tutorial.todolist.service;
 
-import com.tutorial.todolist.data.dto.TodoCreateDto;
 import com.tutorial.todolist.data.dto.TodoDto;
-import com.tutorial.todolist.domain.entities.Todo;
+import com.tutorial.todolist.data.dto.TodoRequestDTO;
 
 import java.util.List;
 import java.util.Map;
@@ -12,10 +11,10 @@ public interface TodoService {
 
     TodoDto getById(Long id);
 
-    TodoDto create(TodoCreateDto todoCreateDto);
+    TodoDto create(TodoRequestDTO todoRequestDto);
 
-    Todo update(Long id,
-                Todo updateTodo);
+    TodoDto update(Long id,
+                   TodoRequestDTO updateTodo);
 
     void delete(Long id);
 }

@@ -1,8 +1,7 @@
 package com.tutorial.todolist.controller;
 
-import com.tutorial.todolist.data.dto.TodoCreateDto;
 import com.tutorial.todolist.data.dto.TodoDto;
-import com.tutorial.todolist.domain.entities.Todo;
+import com.tutorial.todolist.data.dto.TodoRequestDTO;
 import com.tutorial.todolist.service.TodoService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,13 +30,13 @@ public class TodoController {
     }
 
     @PostMapping
-    public ResponseEntity<TodoDto> create(@RequestBody TodoCreateDto todo) {
+    public ResponseEntity<TodoDto> create(@RequestBody TodoRequestDTO todo) {
         return ResponseEntity.status(HttpStatus.CREATED).body(todoService.create(todo));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Todo> update(@PathVariable Long id,
-                                       @RequestBody Todo todo) {
+    public ResponseEntity<TodoDto> update(@PathVariable Long id,
+                                          @RequestBody TodoRequestDTO todo) {
         return ResponseEntity.status(HttpStatus.OK).body(todoService.update(id, todo));
     }
 

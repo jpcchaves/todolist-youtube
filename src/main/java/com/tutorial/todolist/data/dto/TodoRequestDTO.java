@@ -1,27 +1,22 @@
 package com.tutorial.todolist.data.dto;
 
-import com.tutorial.todolist.domain.entities.Category;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-
 import java.time.LocalDate;
-import java.util.Date;
 
-public class TodoCreateDto {
+public class TodoRequestDTO {
     private String todo;
     private boolean concluded;
     private boolean active;
     private LocalDate deadline;
     private Long categoryId;
 
-    public TodoCreateDto() {
+    public TodoRequestDTO() {
     }
 
-    public TodoCreateDto(String todo,
-                         boolean concluded,
-                         boolean active,
-                         LocalDate deadline,
-                         Long categoryId) {
+    public TodoRequestDTO(String todo,
+                          boolean concluded,
+                          boolean active,
+                          LocalDate deadline,
+                          Long categoryId) {
         this.todo = todo;
         this.concluded = concluded;
         this.active = active;

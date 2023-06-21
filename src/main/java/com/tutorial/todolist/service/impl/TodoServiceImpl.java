@@ -1,8 +1,8 @@
 package com.tutorial.todolist.service.impl;
 
 import com.tutorial.todolist.data.dto.CategoryDto;
-import com.tutorial.todolist.data.dto.TodoCreateDto;
 import com.tutorial.todolist.data.dto.TodoDto;
+import com.tutorial.todolist.data.dto.TodoRequestDTO;
 import com.tutorial.todolist.domain.entities.Category;
 import com.tutorial.todolist.domain.entities.Todo;
 import com.tutorial.todolist.repository.CategoryRepository;
@@ -52,42 +52,44 @@ public class TodoServiceImpl implements TodoService {
     }
 
     @Override
-    public TodoDto create(TodoCreateDto todoCreateDto) {
+    public TodoDto create(TodoRequestDTO todoRequestDto) {
         Category category = categoryRepository
-                .findById(todoCreateDto.getCategoryId())
-                .orElseThrow(() -> new RuntimeException("Categoria não encontrada com o id informado: " + todoCreateDto.getCategoryId()));
+                .findById(todoRequestDto.getCategoryId())
+                .orElseThrow(() -> new RuntimeException("Categoria não encontrada com o id informado: " + todoRequestDto.getCategoryId()));
 
         Todo todo = new Todo();
 
-        todo.setTodo(todoCreateDto.getTodo());
-        todo.setDeadline(todoCreateDto.getDeadline());
-        todo.setActive(todoCreateDto.isActive());
-        todo.setConcluded(todoCreateDto.isConcluded());
+        todo.setTodo(todoRequestDto.getTodo());
+        todo.setDeadline(todoRequestDto.getDeadline());
+        todo.setActive(todoRequestDto.isActive());
+        todo.setConcluded(todoRequestDto.isConcluded());
         todo.setCategory(category);
 
 
         Todo savedTodo = todoRepository.save(todo);
 
-        TodoDto todoDto = mapperUtils.parseObject(savedTodo, TodoDto.class);
-
-        return todoDto;
+        return mapperUtils.parseObject(savedTodo, TodoDto.class);
     }
 
     @Override
-    public Todo update(Long id,
-                       Todo updateTodo) {
+    public TodoDto update(Long id,
+                          TodoRequestDTO updateTodo) {
         Todo todo = todoRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Tarefa não encontrada com o id informado: " + id));
 
+        Category category = categoryRepository
+                .findById(updateTodo.getCategoryId())
+                .orElseThrow(() -> new RuntimeException("Tarefa não encontrada com o id informado: " + updateTodo.getCategoryId()));
+
         todo.setTodo(updateTodo.getTodo());
         todo.setDeadline(updateTodo.getDeadline());
-        todo.setCategory(updateTodo.getCategory());
+//        todo.setCategory(category);
         todo.setConcluded(updateTodo.isConcluded());
         todo.setActive(updateTodo.isActive());
 
         Todo updatedTodo = todoRepository.save(todo);
 
-        return updatedTodo;
+        return mapperUtils.parseObject(updatedTodo, TodoDto.class);
     }
 
     @Override
