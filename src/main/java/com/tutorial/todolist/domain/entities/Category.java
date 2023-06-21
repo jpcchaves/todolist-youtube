@@ -13,9 +13,9 @@ public class Category {
     private Long id;
     private String name;
 
-    @OneToMany(cascade = CascadeType.ALL,
-               fetch = FetchType.EAGER,
-               mappedBy = "category")
+    @OneToMany(cascade = CascadeType.DETACH,
+            fetch = FetchType.EAGER,
+            mappedBy = "category")
     private List<Todo> todos = new ArrayList<>();
 
     public Category() {

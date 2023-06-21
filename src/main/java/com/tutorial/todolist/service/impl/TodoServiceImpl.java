@@ -94,10 +94,7 @@ public class TodoServiceImpl implements TodoService {
 
     @Override
     public void delete(Long id) {
-        if (todoRepository.existsById(id)) {
-            todoRepository.deleteById(id);
-        } else {
-            throw new RuntimeException("Tarefa não encontrada com o id informado: " + id);
-        }
+        todoRepository.findById(id).orElseThrow(() -> new RuntimeException("Tarefa não encontrada com o id informado: " + id));
+        todoRepository.deleteById(id);
     }
 }
