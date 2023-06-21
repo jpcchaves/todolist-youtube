@@ -10,7 +10,7 @@ import java.util.Map;
 public interface TodoService {
     Map<String, List<TodoDto>> getAll();
 
-    Todo getById(Long id);
+    TodoDto getById(Long id);
 
     TodoDto create(TodoCreateDto todoCreateDto);
 

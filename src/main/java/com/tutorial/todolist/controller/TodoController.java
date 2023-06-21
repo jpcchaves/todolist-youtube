@@ -26,7 +26,7 @@ public class TodoController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Todo> getById(@PathVariable Long id) {
+    public ResponseEntity<TodoDto> getById(@PathVariable Long id) {
         return ResponseEntity.status(HttpStatus.OK).body(todoService.getById(id));
     }
 

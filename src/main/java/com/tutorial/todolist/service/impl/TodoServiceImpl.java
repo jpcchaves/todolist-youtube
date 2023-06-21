@@ -44,11 +44,11 @@ public class TodoServiceImpl implements TodoService {
     }
 
     @Override
-    public Todo getById(Long id) {
+    public TodoDto getById(Long id) {
         Todo todo = todoRepository
                 .findById(id)
                 .orElseThrow(() -> new RuntimeException("Tarefa não encontrada com o id informado: " + id));
-        return todo;
+        return mapperUtils.parseObject(todo, TodoDto.class);
     }
 
     @Override
