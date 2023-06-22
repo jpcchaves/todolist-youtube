@@ -1,12 +1,14 @@
 package com.tutorial.todolist.data.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.validation.constraints.NotBlank;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class CategoryDto {
     private Long id;
+    @NotBlank(message = "O nome da categoria é obrigatório")
     private String name;
     @JsonIgnore
     private List<TodoDto> todos = new ArrayList<>();

@@ -2,6 +2,7 @@ package com.tutorial.todolist.controller;
 
 import com.tutorial.todolist.data.dto.CategoryDto;
 import com.tutorial.todolist.service.CategoryService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -28,13 +29,13 @@ public class CategoryController {
     }
 
     @PostMapping
-    public ResponseEntity<CategoryDto> create(@RequestBody CategoryDto categoryDto) {
+    public ResponseEntity<CategoryDto> create(@Valid @RequestBody CategoryDto categoryDto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(categoryService.create(categoryDto));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<CategoryDto> update(@PathVariable("id") Long id,
-                                              @RequestBody CategoryDto categoryDto) {
+                                              @Valid @RequestBody CategoryDto categoryDto) {
         return ResponseEntity.ok(categoryService.update(id, categoryDto));
     }
 }

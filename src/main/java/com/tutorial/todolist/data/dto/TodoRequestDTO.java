@@ -1,12 +1,20 @@
 package com.tutorial.todolist.data.dto;
 
+import jakarta.validation.constraints.FutureOrPresent;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
 import java.time.LocalDate;
 
 public class TodoRequestDTO {
+    @NotBlank(message = "A tarefa é obrigatória")
     private String todo;
+    @NotNull(message = "A situação da tarefa é obrigatória")
     private boolean concluded;
     private boolean active;
+    @FutureOrPresent(message = "O prazo deve ser uma data futura")
     private LocalDate deadline;
+    @NotNull(message = "Informe uma categoria para salvar a tarefa")
     private Long categoryId;
 
     public TodoRequestDTO() {
