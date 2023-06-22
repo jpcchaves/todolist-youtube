@@ -5,7 +5,6 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.Date;
 
 @Entity
@@ -16,7 +15,6 @@ public class Todo {
     private Long id;
     private String todo;
     private boolean concluded;
-    private boolean active;
     private LocalDate deadline;
 
     @ManyToOne
@@ -37,7 +35,6 @@ public class Todo {
     public Todo(Long id,
                 String todo,
                 boolean concluded,
-                boolean active,
                 LocalDate deadline,
                 Category category,
                 Date concludedAt,
@@ -46,7 +43,6 @@ public class Todo {
         this.id = id;
         this.todo = todo;
         this.concluded = concluded;
-        this.active = active;
         this.deadline = deadline;
         this.category = category;
         this.concludedAt = concludedAt;
@@ -76,14 +72,6 @@ public class Todo {
 
     public void setConcluded(boolean concluded) {
         this.concluded = concluded;
-    }
-
-    public boolean isActive() {
-        return active;
-    }
-
-    public void setActive(boolean active) {
-        this.active = active;
     }
 
     public LocalDate getDeadline() {

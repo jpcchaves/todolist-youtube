@@ -63,7 +63,6 @@ public class TodoServiceImpl implements TodoService {
 
         todo.setTodo(todoRequestDto.getTodo());
         todo.setDeadline(todoRequestDto.getDeadline());
-        todo.setActive(true);
         todo.setConcluded(false);
         todo.setCategory(category);
 
@@ -87,7 +86,6 @@ public class TodoServiceImpl implements TodoService {
         todo.setDeadline(updateTodo.getDeadline());
         todo.setCategory(category);
         todo.setConcluded(updateTodo.isConcluded());
-        todo.setActive(updateTodo.isActive());
 
         Todo updatedTodo = todoRepository.save(todo);
 

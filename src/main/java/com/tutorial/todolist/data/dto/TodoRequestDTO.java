@@ -11,7 +11,6 @@ public class TodoRequestDTO {
     private String todo;
     @NotNull(message = "A situação da tarefa é obrigatória")
     private boolean concluded;
-    private boolean active;
     @FutureOrPresent(message = "O prazo deve ser uma data futura")
     private LocalDate deadline;
     @NotNull(message = "Informe uma categoria para salvar a tarefa")
@@ -22,12 +21,10 @@ public class TodoRequestDTO {
 
     public TodoRequestDTO(String todo,
                           boolean concluded,
-                          boolean active,
                           LocalDate deadline,
                           Long categoryId) {
         this.todo = todo;
         this.concluded = concluded;
-        this.active = active;
         this.deadline = deadline;
         this.categoryId = categoryId;
     }
@@ -47,15 +44,7 @@ public class TodoRequestDTO {
     public void setConcluded(boolean concluded) {
         this.concluded = concluded;
     }
-
-    public boolean isActive() {
-        return active;
-    }
-
-    public void setActive(boolean active) {
-        this.active = active;
-    }
-
+    
     public LocalDate getDeadline() {
         return deadline;
     }

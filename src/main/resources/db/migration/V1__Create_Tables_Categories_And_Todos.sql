@@ -14,7 +14,6 @@ CREATE TABLE
     public.todos
 (
     id           bigserial                      NOT NULL,
-    active       boolean                        NOT NULL,
     concluded    boolean                        NOT NULL,
     concluded_at timestamp(6) without time zone NULL,
     created_at   timestamp(6) without time zone NULL,

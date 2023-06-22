@@ -8,7 +8,6 @@ public class TodoDto {
     private Long id;
     private String todo;
     private boolean concluded;
-    private boolean active;
     private LocalDate deadline;
     private CategoryDto category;
     private Date concludedAt;
@@ -21,7 +20,6 @@ public class TodoDto {
     public TodoDto(Long id,
                    String todo,
                    boolean concluded,
-                   boolean active,
                    LocalDate deadline,
                    CategoryDto category,
                    Date concludedAt,
@@ -30,7 +28,6 @@ public class TodoDto {
         this.id = id;
         this.todo = todo;
         this.concluded = concluded;
-        this.active = active;
         this.deadline = deadline;
         this.category = category;
         this.concludedAt = concludedAt;
@@ -61,15 +58,7 @@ public class TodoDto {
     public void setConcluded(boolean concluded) {
         this.concluded = concluded;
     }
-
-    public boolean isActive() {
-        return active;
-    }
-
-    public void setActive(boolean active) {
-        this.active = active;
-    }
-
+    
     public LocalDate getDeadline() {
         return deadline;
     }
