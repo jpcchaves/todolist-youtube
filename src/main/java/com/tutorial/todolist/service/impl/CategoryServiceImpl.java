@@ -1,6 +1,8 @@
 package com.tutorial.todolist.service.impl;
 
 import com.tutorial.todolist.data.dto.CategoryDto;
+import com.tutorial.todolist.data.dto.OptionDto;
+import com.tutorial.todolist.data.dto.SelectOptionsDto;
 import com.tutorial.todolist.domain.entities.Category;
 import com.tutorial.todolist.exception.ResourceNotFoundException;
 import com.tutorial.todolist.repository.CategoryRepository;
@@ -57,4 +59,18 @@ public class CategoryServiceImpl implements CategoryService {
 
         return mapperUtils.parseObject(updatedCategory, CategoryDto.class);
     }
+
+    @Override
+    public SelectOptionsDto getAllCategoriesOptions() {
+        List<Category> categories = categoryRepository.findAll();
+
+        SelectOptionsDto selectOptionsDtos = new SelectOptionsDto();
+
+        for (Category category : categories) {
+            selectOptionsDtos.getOptions().add(new OptionDto(category.getName(), category.getName()));
+        }
+
+        return selectOptionsDtos;
+    }
+
 }

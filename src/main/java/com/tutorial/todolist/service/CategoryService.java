@@ -1,6 +1,7 @@
 package com.tutorial.todolist.service;
 
 import com.tutorial.todolist.data.dto.CategoryDto;
+import com.tutorial.todolist.data.dto.SelectOptionsDto;
 
 import java.util.List;
 
@@ -13,4 +14,6 @@ public interface CategoryService {
 
     CategoryDto update(Long id,
                        CategoryDto categoryDto);
+
+    SelectOptionsDto getAllCategoriesOptions();
 }

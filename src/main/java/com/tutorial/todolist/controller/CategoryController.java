@@ -1,6 +1,7 @@
 package com.tutorial.todolist.controller;
 
 import com.tutorial.todolist.data.dto.CategoryDto;
+import com.tutorial.todolist.data.dto.SelectOptionsDto;
 import com.tutorial.todolist.service.CategoryService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -26,6 +27,11 @@ public class CategoryController {
     @GetMapping("/{id}")
     public ResponseEntity<CategoryDto> getById(@PathVariable("id") Long id) {
         return ResponseEntity.ok(categoryService.getById(id));
+    }
+
+    @GetMapping("/options")
+    public ResponseEntity<SelectOptionsDto> getCategoriesOptions() {
+        return ResponseEntity.ok(categoryService.getAllCategoriesOptions());
     }
 
     @PostMapping
