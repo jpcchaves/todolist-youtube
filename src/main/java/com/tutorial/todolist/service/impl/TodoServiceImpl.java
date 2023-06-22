@@ -62,8 +62,8 @@ public class TodoServiceImpl implements TodoService {
 
         todo.setTodo(todoRequestDto.getTodo());
         todo.setDeadline(todoRequestDto.getDeadline());
-        todo.setActive(todoRequestDto.isActive());
-        todo.setConcluded(todoRequestDto.isConcluded());
+        todo.setActive(true);
+        todo.setConcluded(false);
         todo.setCategory(category);
 
 
