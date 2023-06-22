@@ -4,6 +4,7 @@ import com.tutorial.todolist.data.dto.CategoryDto;
 import com.tutorial.todolist.data.dto.OptionDto;
 import com.tutorial.todolist.data.dto.SelectOptionsDto;
 import com.tutorial.todolist.domain.entities.Category;
+import com.tutorial.todolist.exception.BadRequestException;
 import com.tutorial.todolist.exception.ResourceNotFoundException;
 import com.tutorial.todolist.repository.CategoryRepository;
 import com.tutorial.todolist.service.CategoryService;
@@ -41,6 +42,8 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public CategoryDto create(CategoryDto categoryDto) {
+        checkIfCategoryAlreadyExists(categoryDto.getName());
+
         Category category = mapperUtils.parseObject(categoryDto, Category.class);
         Category savedCategory = categoryRepository.save(category);
         return mapperUtils.parseObject(savedCategory, CategoryDto.class);
@@ -49,6 +52,8 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public CategoryDto update(Long id,
                               CategoryDto categoryDto) {
+        checkIfCategoryAlreadyExists(categoryDto.getName());
+
         Category category = categoryRepository
                 .findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Categoria não encontrada com o id informado: " + id));
@@ -71,6 +76,12 @@ public class CategoryServiceImpl implements CategoryService {
         }
 
         return selectOptionsDtos;
+    }
+
+    private void checkIfCategoryAlreadyExists(String category) {
+        if (categoryRepository.existsByNameContainingIgnoreCase(category)) {
+            throw new BadRequestException("Já existe uma categoria cadastrada com o nome informado: " + category);
+        }
     }
 
 }

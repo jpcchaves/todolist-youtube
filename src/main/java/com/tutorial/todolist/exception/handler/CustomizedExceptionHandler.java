@@ -1,5 +1,6 @@
 package com.tutorial.todolist.exception.handler;
 
+import com.tutorial.todolist.exception.BadRequestException;
 import com.tutorial.todolist.exception.ResourceNotFoundException;
 import com.tutorial.todolist.exception.model.ExceptionResponse;
 import org.springframework.http.HttpHeaders;
@@ -39,6 +40,15 @@ public class CustomizedExceptionHandler extends ResponseEntityExceptionHandler {
                 request.getDescription(false));
 
         return new ResponseEntity<>(exceptionResponse, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(BadRequestException.class)
+    public final ResponseEntity<ExceptionResponse> handleBadRequestException(BadRequestException ex,
+                                                                             WebRequest request) {
+        ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), ex.getMessage(),
+                request.getDescription(false));
+
+        return new ResponseEntity<>(exceptionResponse, HttpStatus.BAD_REQUEST);
     }
 
     @Override
