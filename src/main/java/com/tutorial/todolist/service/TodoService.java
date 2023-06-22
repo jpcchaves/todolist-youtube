@@ -18,5 +18,7 @@ public interface TodoService {
 
     List<TodoDto> findByName(String todo);
 
+    TodoDto concludeTodo(Long id);
+
     void delete(Long id);
 }

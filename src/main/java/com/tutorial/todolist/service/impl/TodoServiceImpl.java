@@ -12,6 +12,7 @@ import com.tutorial.todolist.service.TodoService;
 import com.tutorial.todolist.utils.mapper.MapperUtils;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -100,6 +101,24 @@ public class TodoServiceImpl implements TodoService {
 
         return mapperUtils.parseListObjects(
                 foundTodo, TodoDto.class);
+    }
+
+    @Override
+    public TodoDto concludeTodo(Long id) {
+        Todo todo = todoRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Tarefa não encontrada com o id informado: " + id));
+
+        todo.setConcluded(!todo.isConcluded());
+
+        if (todo.isConcluded()) {
+            todo.setConcludedAt(new Date());
+        } else {
+            todo.setConcludedAt(null);
+        }
+
+        Todo savedTodo = todoRepository.save(todo);
+
+        return mapperUtils.parseObject(savedTodo, TodoDto.class);
     }
 
     @Override
