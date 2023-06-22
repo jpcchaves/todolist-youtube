@@ -5,6 +5,7 @@ import com.tutorial.todolist.data.dto.TodoDto;
 import com.tutorial.todolist.data.dto.TodoRequestDTO;
 import com.tutorial.todolist.domain.entities.Category;
 import com.tutorial.todolist.domain.entities.Todo;
+import com.tutorial.todolist.exception.ResourceNotFoundException;
 import com.tutorial.todolist.repository.CategoryRepository;
 import com.tutorial.todolist.repository.TodoRepository;
 import com.tutorial.todolist.service.TodoService;
@@ -47,7 +48,7 @@ public class TodoServiceImpl implements TodoService {
     public TodoDto getById(Long id) {
         Todo todo = todoRepository
                 .findById(id)
-                .orElseThrow(() -> new RuntimeException("Tarefa não encontrada com o id informado: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Tarefa não encontrada com o id informado: " + id));
         return mapperUtils.parseObject(todo, TodoDto.class);
     }
 
@@ -55,7 +56,7 @@ public class TodoServiceImpl implements TodoService {
     public TodoDto create(TodoRequestDTO todoRequestDto) {
         Category category = categoryRepository
                 .findById(todoRequestDto.getCategoryId())
-                .orElseThrow(() -> new RuntimeException("Categoria não encontrada com o id informado: " + todoRequestDto.getCategoryId()));
+                .orElseThrow(() -> new ResourceNotFoundException("Categoria não encontrada com o id informado: " + todoRequestDto.getCategoryId()));
 
         Todo todo = new Todo();
 
@@ -75,11 +76,11 @@ public class TodoServiceImpl implements TodoService {
     public TodoDto update(Long id,
                           TodoRequestDTO updateTodo) {
         Todo todo = todoRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Tarefa não encontrada com o id informado: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Tarefa não encontrada com o id informado: " + id));
 
         Category category = categoryRepository
                 .findById(updateTodo.getCategoryId())
-                .orElseThrow(() -> new RuntimeException("Tarefa não encontrada com o id informado: " + updateTodo.getCategoryId()));
+                .orElseThrow(() -> new ResourceNotFoundException("Tarefa não encontrada com o id informado: " + updateTodo.getCategoryId()));
 
         todo.setTodo(updateTodo.getTodo());
         todo.setDeadline(updateTodo.getDeadline());
@@ -94,7 +95,7 @@ public class TodoServiceImpl implements TodoService {
 
     @Override
     public void delete(Long id) {
-        todoRepository.findById(id).orElseThrow(() -> new RuntimeException("Tarefa não encontrada com o id informado: " + id));
+        todoRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Tarefa não encontrada com o id informado: " + id));
         todoRepository.deleteById(id);
     }
 }

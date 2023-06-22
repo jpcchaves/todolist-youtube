@@ -2,6 +2,7 @@ package com.tutorial.todolist.service.impl;
 
 import com.tutorial.todolist.data.dto.CategoryDto;
 import com.tutorial.todolist.domain.entities.Category;
+import com.tutorial.todolist.exception.ResourceNotFoundException;
 import com.tutorial.todolist.repository.CategoryRepository;
 import com.tutorial.todolist.service.CategoryService;
 import com.tutorial.todolist.utils.mapper.MapperUtils;
@@ -32,7 +33,7 @@ public class CategoryServiceImpl implements CategoryService {
     public CategoryDto getById(Long id) {
         Category category = categoryRepository
                 .findById(id)
-                .orElseThrow(() -> new RuntimeException("Categoria não encontrada com o id informado: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Categoria não encontrada com o id informado: " + id));
         return mapperUtils.parseObject(category, CategoryDto.class);
     }
 
@@ -48,7 +49,7 @@ public class CategoryServiceImpl implements CategoryService {
                               CategoryDto categoryDto) {
         Category category = categoryRepository
                 .findById(id)
-                .orElseThrow(() -> new RuntimeException("Categoria não encontrada com o id informado: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Categoria não encontrada com o id informado: " + id));
 
         category.setName(categoryDto.getName());
 
