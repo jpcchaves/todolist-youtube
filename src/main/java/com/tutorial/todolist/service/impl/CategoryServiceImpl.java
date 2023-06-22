@@ -61,13 +61,13 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public SelectOptionsDto getAllCategoriesOptions() {
+    public SelectOptionsDto<Long, String> getAllCategoriesOptions() {
         List<Category> categories = categoryRepository.findAll();
 
-        SelectOptionsDto selectOptionsDtos = new SelectOptionsDto();
+        SelectOptionsDto<Long, String> selectOptionsDtos = new SelectOptionsDto<>();
 
         for (Category category : categories) {
-            selectOptionsDtos.getOptions().add(new OptionDto(category.getName(), category.getName()));
+            selectOptionsDtos.getOptions().add(new OptionDto<>(category.getId(), category.getName()));
         }
 
         return selectOptionsDtos;

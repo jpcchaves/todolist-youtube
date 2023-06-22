@@ -1,31 +1,31 @@
 package com.tutorial.todolist.data.dto;
 
-public class OptionDto {
-    private String value;
-    private String label;
+public class OptionDto<V, L> {
+    private V value;
+    private L label;
 
     public OptionDto() {
     }
 
-    public OptionDto(String value,
-                     String label) {
+    public OptionDto(V value,
+                     L label) {
         this.value = value;
         this.label = label;
     }
 
-    public String getValue() {
+    public V getValue() {
         return value;
     }
 
-    public void setValue(String value) {
+    public void setValue(V value) {
         this.value = value;
     }
 
-    public String getLabel() {
+    public L getLabel() {
         return label;
     }
 
-    public void setLabel(String label) {
+    public void setLabel(L label) {
         this.label = label;
     }
 }

@@ -30,7 +30,7 @@ public class CategoryController {
     }
 
     @GetMapping("/options")
-    public ResponseEntity<SelectOptionsDto> getCategoriesOptions() {
+    public ResponseEntity<SelectOptionsDto<Long, String>> getCategoriesOptions() {
         return ResponseEntity.ok(categoryService.getAllCategoriesOptions());
     }
 

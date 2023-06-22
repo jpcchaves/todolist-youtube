@@ -15,5 +15,5 @@ public interface CategoryService {
     CategoryDto update(Long id,
                        CategoryDto categoryDto);
 
-    SelectOptionsDto getAllCategoriesOptions();
+    SelectOptionsDto<Long, String> getAllCategoriesOptions();
 }
