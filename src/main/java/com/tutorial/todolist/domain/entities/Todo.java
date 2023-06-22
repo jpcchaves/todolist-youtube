@@ -21,7 +21,7 @@ public class Todo {
     @JoinColumn(name = "category_id", referencedColumnName = "id")
     private Category category;
 
-    private Date concludedAt;
+    private LocalDate concludedAt;
 
     @CreationTimestamp
     private Date createdAt;
@@ -37,7 +37,7 @@ public class Todo {
                 boolean concluded,
                 LocalDate deadline,
                 Category category,
-                Date concludedAt,
+                LocalDate concludedAt,
                 Date createdAt,
                 Date updatedAt) {
         this.id = id;
@@ -82,11 +82,11 @@ public class Todo {
         this.deadline = deadline;
     }
 
-    public Date getConcludedAt() {
+    public LocalDate getConcludedAt() {
         return concludedAt;
     }
 
-    public void setConcludedAt(Date concludedAt) {
+    public void setConcludedAt(LocalDate concludedAt) {
         this.concludedAt = concludedAt;
     }
 

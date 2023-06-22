@@ -10,7 +10,7 @@ public class TodoDto {
     private boolean concluded;
     private LocalDate deadline;
     private CategoryDto category;
-    private Date concludedAt;
+    private LocalDate concludedAt;
     private Date createdAt;
     private Date updatedAt;
 
@@ -22,7 +22,7 @@ public class TodoDto {
                    boolean concluded,
                    LocalDate deadline,
                    CategoryDto category,
-                   Date concludedAt,
+                   LocalDate concludedAt,
                    Date createdAt,
                    Date updatedAt) {
         this.id = id;
@@ -58,7 +58,7 @@ public class TodoDto {
     public void setConcluded(boolean concluded) {
         this.concluded = concluded;
     }
-    
+
     public LocalDate getDeadline() {
         return deadline;
     }
@@ -75,11 +75,11 @@ public class TodoDto {
         this.category = category;
     }
 
-    public Date getConcludedAt() {
+    public LocalDate getConcludedAt() {
         return concludedAt;
     }
 
-    public void setConcludedAt(Date concludedAt) {
+    public void setConcludedAt(LocalDate concludedAt) {
         this.concludedAt = concludedAt;
     }
 

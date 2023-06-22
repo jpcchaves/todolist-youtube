@@ -12,7 +12,7 @@ import com.tutorial.todolist.service.TodoService;
 import com.tutorial.todolist.utils.mapper.MapperUtils;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -109,7 +109,7 @@ public class TodoServiceImpl implements TodoService {
         todo.setConcluded(!todo.isConcluded());
 
         if (todo.isConcluded()) {
-            todo.setConcludedAt(new Date());
+            todo.setConcludedAt(LocalDate.now());
         } else {
             todo.setConcludedAt(null);
         }
