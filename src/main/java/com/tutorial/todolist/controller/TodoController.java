@@ -41,6 +41,11 @@ public class TodoController {
         return ResponseEntity.status(HttpStatus.OK).body(todoService.update(id, todo));
     }
 
+    @GetMapping("/filter")
+    public ResponseEntity<List<TodoDto>> findByTodo(@RequestParam(name = "todo") String todo) {
+        return ResponseEntity.ok(todoService.findByName(todo));
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         todoService.delete(id);

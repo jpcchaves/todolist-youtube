@@ -94,6 +94,15 @@ public class TodoServiceImpl implements TodoService {
     }
 
     @Override
+    public List<TodoDto> findByName(String todo) {
+        List<Todo> foundTodo = todoRepository
+                .findAllByTodoContainingIgnoreCase(todo);
+
+        return mapperUtils.parseListObjects(
+                foundTodo, TodoDto.class);
+    }
+
+    @Override
     public void delete(Long id) {
         todoRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Tarefa não encontrada com o id informado: " + id));
         todoRepository.deleteById(id);
