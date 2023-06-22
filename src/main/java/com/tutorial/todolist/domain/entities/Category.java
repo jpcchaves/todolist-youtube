@@ -11,6 +11,7 @@ public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(unique = true, length = 100, nullable = false)
     private String name;
 
     @OneToMany(cascade = CascadeType.DETACH,
