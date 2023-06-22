@@ -66,7 +66,7 @@ public class MapperUtils {
  CREATE TABLE
   public.categories (
     id bigserial NOT NULL,
-    name character varying (255) NULL
+    name character varying (100) UNIQUE NOT NULL
   );
 
 ALTER TABLE
