@@ -37,6 +37,12 @@ public class TodoServiceImpl implements TodoService {
 
         List<CategoryDto> categoryDtoList = mapperUtils.parseListObjects(categoryList, CategoryDto.class);
 
+        Map<String, List<TodoDto>> todoDtoMap = buildMapTodosResponse(categoryDtoList);
+
+        return todoDtoMap;
+    }
+
+    private Map<String, List<TodoDto>> buildMapTodosResponse(List<CategoryDto> categoryDtoList) {
         Map<String, List<TodoDto>> todoDtoMap = new HashMap<>();
         for (CategoryDto dto : categoryDtoList) {
             todoDtoMap.put(dto.getName(), dto.getTodos());
