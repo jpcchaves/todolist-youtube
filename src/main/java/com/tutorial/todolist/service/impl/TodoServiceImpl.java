@@ -42,20 +42,10 @@ public class TodoServiceImpl implements TodoService {
         return todoDtoMap;
     }
 
-    private Map<String, List<TodoDto>> buildMapTodosResponse(List<CategoryDto> categoryDtoList) {
-        Map<String, List<TodoDto>> todoDtoMap = new HashMap<>();
-        for (CategoryDto dto : categoryDtoList) {
-            todoDtoMap.put(dto.getName(), dto.getTodos());
-        }
-
-        return todoDtoMap;
-    }
-
     @Override
     public TodoDto getById(Long id) {
-        Todo todo = todoRepository
-                .findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Tarefa não encontrada com o id informado: " + id));
+        Todo todo = findById(id);
+
         return mapperUtils.parseObject(todo, TodoDto.class);
     }
 
@@ -81,8 +71,7 @@ public class TodoServiceImpl implements TodoService {
     @Override
     public TodoDto update(Long id,
                           TodoRequestDTO updateTodo) {
-        Todo todo = todoRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Tarefa não encontrada com o id informado: " + id));
+        Todo todo = findById(id);
 
         Category category = categoryRepository
                 .findById(updateTodo.getCategoryId())
@@ -109,8 +98,7 @@ public class TodoServiceImpl implements TodoService {
 
     @Override
     public TodoDto concludeTodo(Long id) {
-        Todo todo = todoRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Tarefa não encontrada com o id informado: " + id));
+        Todo todo = findById(id);
 
         todo.setConcluded(!todo.isConcluded());
 
@@ -127,7 +115,21 @@ public class TodoServiceImpl implements TodoService {
 
     @Override
     public void delete(Long id) {
-        todoRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Tarefa não encontrada com o id informado: " + id));
+        findById(id);
         todoRepository.deleteById(id);
+    }
+
+
+    private Todo findById(Long id) {
+        return todoRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Tarefa não encontrada com o id informado: " + id));
+    }
+
+    private Map<String, List<TodoDto>> buildMapTodosResponse(List<CategoryDto> categoryDtoList) {
+        Map<String, List<TodoDto>> todoDtoMap = new HashMap<>();
+        for (CategoryDto dto : categoryDtoList) {
+            todoDtoMap.put(dto.getName(), dto.getTodos());
+        }
+
+        return todoDtoMap;
     }
 }
